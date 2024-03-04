@@ -1,0 +1,23 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package billing {
+	package "'Invoice' Aggregate" <<Rectangle>> {
+		class Invoice <<(E,DarkSeaGreen) Entity>> {
+		}
+		class InvoiceCreated <<(E,#ff9f4b) Domain Event>> {
+		}
+		class PaymentReceived <<(E,#ff9f4b) Domain Event>> {
+		}
+		class InvoiceOverdue <<(E,#ff9f4b) Domain Event>> {
+		}
+		class InvoiceItems <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class TotalAmountToPay <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+}
+
+
+@enduml

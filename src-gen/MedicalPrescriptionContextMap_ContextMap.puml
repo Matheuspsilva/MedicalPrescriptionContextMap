@@ -1,0 +1,36 @@
+@startuml
+
+skinparam componentStyle uml2
+
+component [MedicalPrescriptionContext]
+component [HospitalPharmacyContext]
+component [MedicationAdministrationContext]
+component [HospitalManagementSystemContext]
+component [BillingContext]
+component [InventoryManagementContext]
+
+[MedicalPrescriptionContext]<-->[HospitalPharmacyContext] : Shared Kernel
+
+interface "Upstream-Downstream" as HospitalPharmacyContext_to_MedicationAdministrationContext
+[MedicationAdministrationContext] --> HospitalPharmacyContext_to_MedicationAdministrationContext
+HospitalPharmacyContext_to_MedicationAdministrationContext <.. [HospitalPharmacyContext] : consume
+
+interface "Upstream-Downstream" as HospitalPharmacyContext_to_HospitalManagementSystemContext
+[HospitalManagementSystemContext] --> HospitalPharmacyContext_to_HospitalManagementSystemContext : OPEN_HOST_SERVICE, PUBLISHED_LANGUAGE
+HospitalPharmacyContext_to_HospitalManagementSystemContext <.. [HospitalPharmacyContext] : consume
+
+interface "Upstream-Downstream" as MedicationAdministrationContext_to_HospitalPharmacyContext
+[HospitalPharmacyContext] --> MedicationAdministrationContext_to_HospitalPharmacyContext
+MedicationAdministrationContext_to_HospitalPharmacyContext <.. [MedicationAdministrationContext] : use via ANTICORRUPTION_LAYER
+
+interface "Upstream-Downstream" as HospitalManagementSystemContext_to_BillingContext
+[BillingContext] --> HospitalManagementSystemContext_to_BillingContext
+HospitalManagementSystemContext_to_BillingContext <.. [HospitalManagementSystemContext] : use as CONFORMIST
+
+interface "Upstream-Downstream" as HospitalManagementSystemContext_to_InventoryManagementContext
+[InventoryManagementContext] --> HospitalManagementSystemContext_to_InventoryManagementContext
+HospitalManagementSystemContext_to_InventoryManagementContext <.. [HospitalManagementSystemContext] : use as CONFORMIST
+
+
+
+@enduml

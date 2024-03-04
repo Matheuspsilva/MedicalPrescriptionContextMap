@@ -1,0 +1,45 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package hospitalManagementSystem {
+	package "'Patient' Aggregate" <<Rectangle>> {
+		class Patient <<(E,DarkSeaGreen) Entity>> {
+		}
+		class PatientRegistered <<(E,#ff9f4b) Domain Event>> {
+		}
+		class PatientAdmitted <<(E,#ff9f4b) Domain Event>> {
+		}
+		class InvoiceGenerated <<(E,#ff9f4b) Domain Event>> {
+		}
+		class PatientContactInformation <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class HealthInsuranceData <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+	package "'MedicalRecord' Aggregate" <<Rectangle>> {
+		class MedicalRecord <<(E,DarkSeaGreen) Entity>> {
+		}
+		class MedicalRecordCreated <<(E,#ff9f4b) Domain Event>> {
+		}
+		class MedicalRecordUpdated <<(E,#ff9f4b) Domain Event>> {
+		}
+		class MedicalRecordDeleted <<(E,#ff9f4b) Domain Event>> {
+		}
+		class MedicalRecordData <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class MedicalRecordAttachments <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+	package "'Appointment' Aggregate" <<Rectangle>> {
+		class Appointment <<(E,DarkSeaGreen) Entity>> {
+		}
+		class AppointmentScheduled <<(E,#ff9f4b) Domain Event>> {
+		}
+		class AppointmentCancelled <<(E,#ff9f4b) Domain Event>> {
+		}
+	}
+}
+
+
+@enduml

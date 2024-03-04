@@ -1,0 +1,23 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package hospitalPharmacy {
+	package "'Medication' Aggregate" <<Rectangle>> {
+		class Medication <<(E,DarkSeaGreen) Entity>> {
+		}
+		class MedicationReceived <<(E,#ff9f4b) Domain Event>> {
+		}
+		class MedicationDispensed <<(E,#ff9f4b) Domain Event>> {
+		}
+		class LowStock <<(E,#ff9f4b) Domain Event>> {
+		}
+		class StockQuantity <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class ExpirationDate <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+}
+
+
+@enduml

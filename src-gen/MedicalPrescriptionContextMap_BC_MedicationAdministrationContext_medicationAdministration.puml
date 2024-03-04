@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package medicationAdministration {
+	package "'MedicationAdministration' Aggregate" <<Rectangle>> {
+		class MedicationAdministered <<(E,#ff9f4b) Domain Event>> {
+		}
+		class MedicationAdministrationError <<(E,#ff9f4b) Domain Event>> {
+		}
+		class AdministrationTime <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class ApplicationRecord <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+}
+
+
+@enduml

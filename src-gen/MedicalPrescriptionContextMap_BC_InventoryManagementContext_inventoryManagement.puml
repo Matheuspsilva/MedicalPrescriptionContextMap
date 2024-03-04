@@ -1,0 +1,19 @@
+@startuml
+
+skinparam componentStyle uml2
+
+package inventoryManagement {
+	package "'MedicationInventory' Aggregate" <<Rectangle>> {
+		class InventoryRestocked <<(E,#ff9f4b) Domain Event>> {
+		}
+		class ExpiredMedication <<(E,#ff9f4b) Domain Event>> {
+		}
+		class MedicationBatch <<(V,DarkSeaGreen) Value Object>> {
+		}
+		class MinimumStockLevel <<(V,DarkSeaGreen) Value Object>> {
+		}
+	}
+}
+
+
+@enduml
