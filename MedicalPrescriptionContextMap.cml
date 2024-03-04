@@ -1,0 +1,109 @@
+ContextMap MedicalPrescriptionContextMap {
+    contains MedicalPrescriptionContext
+    contains HospitalPharmacyContext
+    contains MedicationAdministrationContext
+    contains HospitalManagementSystemContext
+    contains BillingContext
+    contains InventoryManagementContext
+
+    MedicalPrescriptionContext [SK]<->[SK] HospitalPharmacyContext
+
+    HospitalPharmacyContext [D]<-[U] MedicationAdministrationContext
+
+    HospitalPharmacyContext [D]<-[U, OHS, PL] HospitalManagementSystemContext
+
+    MedicationAdministrationContext [D, ACL]<-[U] HospitalPharmacyContext
+
+    HospitalManagementSystemContext [D, CF]<-[U] BillingContext
+
+    HospitalManagementSystemContext [D, CF]<-[U] InventoryManagementContext
+}
+
+BoundedContext MedicalPrescriptionContext {
+    Module medicalPrescription {
+        Aggregate MedicalPrescription {
+            Entity MedicalPrescription
+            Event MedicationPrescribedCreated
+            Event MedicalPrescriptionCancelled
+            Event MedicalPrescriptionModified
+            ValueObject Dosage
+            ValueObject AdministrationSchedule
+            ValueObject MedicationTimes
+        }
+    }
+}
+
+BoundedContext HospitalPharmacyContext {
+    Module hospitalPharmacy {
+        Aggregate Medication {
+            Entity Medication
+            Event MedicationReceived
+            Event MedicationDispensed
+            Event LowStock
+            ValueObject StockQuantity
+            ValueObject ExpirationDate
+        }
+    }
+}
+
+BoundedContext MedicationAdministrationContext {
+    Module medicationAdministration {
+        Aggregate MedicationAdministration {
+            Event MedicationAdministered
+            Event MedicationAdministrationError
+            ValueObject AdministrationTime
+            ValueObject ApplicationRecord
+        }
+    }
+}
+
+BoundedContext HospitalManagementSystemContext {
+    Module hospitalManagementSystem {
+        Aggregate Patient {
+            Entity Patient
+            Event PatientRegistered
+            Event PatientAdmitted
+            Event InvoiceGenerated
+            ValueObject PatientContactInformation
+            ValueObject HealthInsuranceData
+        }
+        Aggregate MedicalRecord {
+            Entity MedicalRecord
+            Event MedicalRecordCreated
+            Event MedicalRecordUpdated
+            Event MedicalRecordDeleted
+            ValueObject MedicalRecordData
+            ValueObject MedicalRecordAttachments
+        }
+        Aggregate Appointment {
+            Entity Appointment
+            Event AppointmentScheduled
+            Event AppointmentCancelled
+        }
+    }
+}
+
+BoundedContext BillingContext {
+    Module billing {
+        Aggregate Invoice {
+            Entity Invoice
+            Event InvoiceCreated
+            Event PaymentReceived
+            Event InvoiceOverdue
+            ValueObject InvoiceItems
+            ValueObject TotalAmountToPay
+        }
+    }
+}
+
+BoundedContext InventoryManagementContext {
+    Module inventoryManagement {
+        Aggregate MedicationInventory {
+            Event InventoryRestocked
+            Event ExpiredMedication
+            ValueObject MedicationBatch
+            ValueObject MinimumStockLevel
+        }
+    }
+}
+
